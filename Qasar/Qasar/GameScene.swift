@@ -26,7 +26,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var motionManager : CMMotionManager?
     let alienCategory:UInt32 = 0x1 << 1
     let laserCategory:UInt32 = 0x1 << 0
-    let userCategory:UInt32 = 0x1 << 2
+    let userCategory:UInt32 = 0x1 << 0
     var user: SKSpriteNode?
     var gameTimer: Timer?
     var shotTimer: Timer?
@@ -258,7 +258,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         explosion.position = userNode.position
         self.addChild(explosion)
         
-        self.run(SKAction.playSoundFileNamed("explosion.mp3", waitForCompletion: false))
+        self.run(SKAction.playSoundFileNamed("bigzap2.mp3", waitForCompletion: false))
         
         userNode.removeFromParent()
         alienNode.removeFromParent()
