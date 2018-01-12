@@ -7,8 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		CE3C783B200860640076B665 /* spaceship0000.png in Resources */ = {isa = PBXBuildFile; fileRef = CE3C783A200860630076B665 /* spaceship0000.png */; };
-		CE95760B200884FF008AC0EF /* blast1.mov in Resources */ = {isa = PBXBuildFile; fileRef = CE95760A200884FF008AC0EF /* blast1.mov */; };
+		300B24082008B41F000715E4 /* laserblast in Resources */ = {isa = PBXBuildFile; fileRef = 300B24072008B41F000715E4 /* laserblast */; };
+		300B244A2008DBD6000715E4 /* dead in Resources */ = {isa = PBXBuildFile; fileRef = 300B24492008DBD6000715E4 /* dead */; };
+		300B244C2008E989000715E4 /* spaceship in Resources */ = {isa = PBXBuildFile; fileRef = 300B244B2008E989000715E4 /* spaceship */; };
+		300B24502008F93E000715E4 /* QuasarSounds in Resources */ = {isa = PBXBuildFile; fileRef = 300B244F2008F93E000715E4 /* QuasarSounds */; };
+		300B24572008FA3A000715E4 /* bigzap1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 300B24512008FA39000715E4 /* bigzap1.mp3 */; };
+		300B24582008FA3A000715E4 /* zap2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 300B24522008FA39000715E4 /* zap2.mp3 */; };
+		300B24592008FA3A000715E4 /* zap4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 300B24532008FA39000715E4 /* zap4.mp3 */; };
+		300B245A2008FA3A000715E4 /* bigzap2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 300B24542008FA3A000715E4 /* bigzap2.mp3 */; };
+		300B245B2008FA3A000715E4 /* zap3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 300B24552008FA3A000715E4 /* zap3.mp3 */; };
+		300B245C2008FA3A000715E4 /* zap1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 300B24562008FA3A000715E4 /* zap1.mp3 */; };
 		CEC8F06A20081BD9004FEEF5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC8F06920081BD9004FEEF5 /* AppDelegate.swift */; };
 		CEC8F06C20081BD9004FEEF5 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = CEC8F06B20081BD9004FEEF5 /* GameScene.sks */; };
 		CEC8F06E20081BD9004FEEF5 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = CEC8F06D20081BD9004FEEF5 /* Actions.sks */; };
@@ -44,8 +52,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		CE3C783A200860630076B665 /* spaceship0000.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spaceship0000.png; sourceTree = "<group>"; };
-		CE95760A200884FF008AC0EF /* blast1.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = blast1.mov; sourceTree = "<group>"; };
+		300B24072008B41F000715E4 /* laserblast */ = {isa = PBXFileReference; lastKnownFileType = folder; name = laserblast; path = ../../../../Documents/pictures/movies/quasar/jon/laserblast; sourceTree = "<group>"; };
+		300B24492008DBD6000715E4 /* dead */ = {isa = PBXFileReference; lastKnownFileType = folder; name = dead; path = ../../../../Documents/pictures/movies/quasar/jon/dead; sourceTree = "<group>"; };
+		300B244B2008E989000715E4 /* spaceship */ = {isa = PBXFileReference; lastKnownFileType = folder; name = spaceship; path = ../../../../Documents/pictures/movies/quasar/jon/spaceship; sourceTree = "<group>"; };
+		300B244F2008F93E000715E4 /* QuasarSounds */ = {isa = PBXFileReference; lastKnownFileType = folder; name = QuasarSounds; path = ../../../../Documents/sounds/QuasarSounds; sourceTree = "<group>"; };
+		300B24512008FA39000715E4 /* bigzap1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = bigzap1.mp3; path = ../../../../Documents/sounds/QuasarSounds/bigzap1.mp3; sourceTree = "<group>"; };
+		300B24522008FA39000715E4 /* zap2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = zap2.mp3; path = ../../../../Documents/sounds/QuasarSounds/zap2.mp3; sourceTree = "<group>"; };
+		300B24532008FA39000715E4 /* zap4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = zap4.mp3; path = ../../../../Documents/sounds/QuasarSounds/zap4.mp3; sourceTree = "<group>"; };
+		300B24542008FA3A000715E4 /* bigzap2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = bigzap2.mp3; path = ../../../../Documents/sounds/QuasarSounds/bigzap2.mp3; sourceTree = "<group>"; };
+		300B24552008FA3A000715E4 /* zap3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = zap3.mp3; path = ../../../../Documents/sounds/QuasarSounds/zap3.mp3; sourceTree = "<group>"; };
+		300B24562008FA3A000715E4 /* zap1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = zap1.mp3; path = ../../../../Documents/sounds/QuasarSounds/zap1.mp3; sourceTree = "<group>"; };
 		CEC8F06620081BD9004FEEF5 /* Qasar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Qasar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEC8F06920081BD9004FEEF5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CEC8F06B20081BD9004FEEF5 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -121,15 +137,23 @@
 				CEC8F06B20081BD9004FEEF5 /* GameScene.sks */,
 				CEC8F06D20081BD9004FEEF5 /* Actions.sks */,
 				CEC8F06F20081BD9004FEEF5 /* GameScene.swift */,
-				CE3C783A200860630076B665 /* spaceship0000.png */,
+				300B244F2008F93E000715E4 /* QuasarSounds */,
+				300B244B2008E989000715E4 /* spaceship */,
+				300B24072008B41F000715E4 /* laserblast */,
 				CEC8F0AD200846FA004FEEF5 /* laser3 */,
 				CEC8F07120081BD9004FEEF5 /* GameViewController.swift */,
 				CEC8F07320081BD9004FEEF5 /* Main.storyboard */,
 				CEC8F07620081BD9004FEEF5 /* Assets.xcassets */,
-				CE95760A200884FF008AC0EF /* blast1.mov */,
+				300B24492008DBD6000715E4 /* dead */,
 				CEC8F0AB20084635004FEEF5 /* laser2 */,
 				CEC8F0A920082EC3004FEEF5 /* qasarbackground_converted.mp4 */,
 				CEC8F09D20081CAC004FEEF5 /* explosion.mp3 */,
+				300B24512008FA39000715E4 /* bigzap1.mp3 */,
+				300B24542008FA3A000715E4 /* bigzap2.mp3 */,
+				300B24562008FA3A000715E4 /* zap1.mp3 */,
+				300B24522008FA39000715E4 /* zap2.mp3 */,
+				300B24552008FA3A000715E4 /* zap3.mp3 */,
+				300B24532008FA39000715E4 /* zap4.mp3 */,
 				CEC8F09E20081CAC004FEEF5 /* Explosion.sks */,
 				CEC8F07820081BD9004FEEF5 /* LaunchScreen.storyboard */,
 				CEC8F07B20081BD9004FEEF5 /* Info.plist */,
@@ -262,17 +286,25 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				300B245A2008FA3A000715E4 /* bigzap2.mp3 in Resources */,
 				CEC8F0AE200846FA004FEEF5 /* laser3 in Resources */,
-				CE95760B200884FF008AC0EF /* blast1.mov in Resources */,
 				CEC8F0A020081CAD004FEEF5 /* explosion.mp3 in Resources */,
 				CEC8F07520081BD9004FEEF5 /* Main.storyboard in Resources */,
+				300B24582008FA3A000715E4 /* zap2.mp3 in Resources */,
+				300B244C2008E989000715E4 /* spaceship in Resources */,
+				300B245C2008FA3A000715E4 /* zap1.mp3 in Resources */,
 				CEC8F06C20081BD9004FEEF5 /* GameScene.sks in Resources */,
+				300B24502008F93E000715E4 /* QuasarSounds in Resources */,
+				300B24082008B41F000715E4 /* laserblast in Resources */,
 				CEC8F0AA20082EC3004FEEF5 /* qasarbackground_converted.mp4 in Resources */,
 				CEC8F07720081BD9004FEEF5 /* Assets.xcassets in Resources */,
 				CEC8F07A20081BD9004FEEF5 /* LaunchScreen.storyboard in Resources */,
 				CEC8F0A120081CAD004FEEF5 /* Explosion.sks in Resources */,
+				300B24592008FA3A000715E4 /* zap4.mp3 in Resources */,
 				CEC8F06E20081BD9004FEEF5 /* Actions.sks in Resources */,
-				CE3C783B200860640076B665 /* spaceship0000.png in Resources */,
+				300B24572008FA3A000715E4 /* bigzap1.mp3 in Resources */,
+				300B244A2008DBD6000715E4 /* dead in Resources */,
+				300B245B2008FA3A000715E4 /* zap3.mp3 in Resources */,
 				CEC8F0AC20084635004FEEF5 /* laser2 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -467,10 +499,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = NNUUB82W9R;
+				DEVELOPMENT_TEAM = JUE8686G8S;
 				INFOPLIST_FILE = Qasar/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.user.Qasar;
+				PRODUCT_BUNDLE_IDENTIFIER = com.user.Quasar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -482,10 +514,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = NNUUB82W9R;
+				DEVELOPMENT_TEAM = JUE8686G8S;
 				INFOPLIST_FILE = Qasar/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.user.Qasar;
+				PRODUCT_BUNDLE_IDENTIFIER = com.user.Quasar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

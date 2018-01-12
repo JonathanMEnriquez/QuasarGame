@@ -22,23 +22,33 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private var spinnyNode : SKShapeNode?
     var player = AVPlayer()
     var Bplayer = AVPlayer()
+    var blastVideoNode = SKSpriteNode()
     var motionManager : CMMotionManager?
     let alienCategory:UInt32 = 0x1 << 1
     let laserCategory:UInt32 = 0x1 << 0
-    let userCategory:UInt32 = 0x1 << 2
+    let userCategory:UInt32 = 0x1 << 0
     var user: SKSpriteNode?
     var gameTimer: Timer?
     var shotTimer: Timer?
+    var blastTimer: Timer?
     var shot = 0
+    var score = SKLabelNode(text: "0")
+    var userShot = SKSpriteNode()
     
+
     
 
     
     override func sceneDidLoad() {
         self.physicsWorld.contactDelegate = self
-
         
         self.lastUpdateTime = 0
+        score.position.x = 0.0
+        score.position.y = -300.0
+        score.fontSize = 200.0
+        score.fontColor = #colorLiteral(red: 0.9999960065, green: 1, blue: 1, alpha: 1)
+        score.zPosition = 4.0
+        self.addChild(score)
         user = SKSpriteNode(imageNamed: "spaceship0000")
         user?.position = CGPoint(x: 0, y: 0)
         user?.scale(to: CGSize(width: (user?.size.width)! / 4, height: (user?.size.height)! / 4))
@@ -51,6 +61,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         user?.physicsBody?.categoryBitMask = userCategory
 //        user?.physicsBody?.contactTestBitMask = laserCategory
         user?.physicsBody?.collisionBitMask = 2
+        user?.zPosition = 1.0
         
         self.addChild(user!)
         
@@ -79,13 +90,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                         print(Int(myData.userAcceleration.x * 100))
                         print("X")
                         
-                        self.fireTorpedo(torpedoNode)
+//                        self.fireTorpedo(torpedoNode)
                         //                        torpedoNode.position.y += 25
                         
                         
                     }
                     
-                    if myData.userAcceleration.y > 0.9 || myData.userAcceleration.y < -0.9{
+                    if myData.userAcceleration.y > 0.9{
                         print(Int(myData.userAcceleration.x * 100))
                         print("Y")
                         
@@ -132,12 +143,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                                        
                                        y: frame.midY)
         
-        videoNode?.zPosition = 0
+        videoNode?.zPosition = 0.0
         videoNode?.size = CGSize(width: 2 * frame.maxX, height: 2 * frame.maxY)
         
         addChild((videoNode)!)
-        
-        
+//
+//
         player.play()
         
         
@@ -166,6 +177,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         gameTimer = Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(addEnemy), userInfo: nil, repeats: true)
         
+        blastTimer = Timer.scheduledTimer(timeInterval: 0.2, target: self, selector: #selector(slowShot), userInfo: nil, repeats: true)
+        
+        
+        
     }
     
     
@@ -178,6 +193,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             shot -= 1
         }
     }
+    
+    
+
+    
+    
     
     @objc func addEnemy () {
         
@@ -195,10 +215,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         enemy.physicsBody?.categoryBitMask = alienCategory
         enemy.physicsBody?.contactTestBitMask = laserCategory
         enemy.physicsBody?.collisionBitMask = 0
+        enemy.zPosition = 3.0
         
         self.addChild(enemy)
         
-        let animationDuration:TimeInterval = 6
+        let animationDuration:TimeInterval = 3
         
         var actionArray = [SKAction]()
         
@@ -209,61 +230,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         enemy.run(SKAction.sequence(actionArray))
     }
     
-    func blast(){
-        
-        let blastVideoNode: SKVideoNode? = {
-            
-            guard let urlString = Bundle.main.path(forResource: "blast1", ofType: "mov") else {
-                print("Fail")
-                return nil
-                
-            }
-            print(urlString)
-            let url = URL(fileURLWithPath: urlString)
-            
-            let item = AVPlayerItem(url: url)
-            
-            Bplayer = AVPlayer(playerItem: item)
-            
-            return SKVideoNode(avPlayer: Bplayer)
-            
-        }()
-        
-        
-        
-        blastVideoNode?.position = CGPoint( x: frame.midX,
-                                       
-                                       y: frame.midY)
-        
-        blastVideoNode?.zPosition = 2
-        
-        blastVideoNode?.size = CGSize(width: 100.0, height: 100.0)
-        
-        addChild((blastVideoNode)!)
-        
-        
-        Bplayer.play()
-        
-        
-        
-        
-        
-        NotificationCenter.default.addObserver(forName: .AVPlayerItemDidPlayToEndTime,
-                                               
-                                               object: Bplayer.currentItem, queue: nil)
-            
-        { notification in
-            
-            self.Bplayer.seek(to: kCMTimeZero)
-            
-            self.Bplayer.play()
-            
-            print("reset Video")
-            
-        }
-
-        
-    }
     
     func didBegin(_ contact: SKPhysicsContact) {
         var firstBody:SKPhysicsBody
@@ -292,44 +258,83 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         explosion.position = userNode.position
         self.addChild(explosion)
         
-        self.run(SKAction.playSoundFileNamed("explosion.mp3", waitForCompletion: false))
+        self.run(SKAction.playSoundFileNamed("bigzap2.mp3", waitForCompletion: false))
         
         userNode.removeFromParent()
         alienNode.removeFromParent()
         
-        gameTimer?.invalidate()
+        self.run(SKAction.wait(forDuration: 1.5)) {
+            explosion.removeFromParent()
+        }
+            gameTimer?.invalidate()
     }
     
-    func torpedoDidCollideWithAlien (torpedoNode:SKSpriteNode, alienNode:SKSpriteNode) {
+    func torpedoDidCollideWithAlien (torpedoNode: SKSpriteNode, alienNode :SKSpriteNode) {
+        score.text = String(Int(score.text!)! + 100)
+
+        print("SCORE:" + score.text!)
+//        let frame = SKSpriteNode()
+//        let wait = SKAction.wait(forDuration: 0.1)
+//        var index = 0
+//        var deadAlien = SKSpriteNode(imageNamed: <#T##String#>)
+//        let shiftIndex = SKAction.run {
+//
+//            index += 1
+//        }
+//        let explosion = SKEmitterNode(fileNamed: "Explosion")!
+//        explosion.position = alienNode.position
+//        self.addChild(explosion)
+        var count = 0
+        var deadLoop = SKSpriteNode(imageNamed: "deadAlien000" + String(count))
+        deadLoop.size = alienNode.size
+        deadLoop.position = alienNode.position
+        addChild(deadLoop)
+        let frame = SKAction.run {
+            deadLoop.removeFromParent()
+            count += 1
+            if count < 9{
+                deadLoop = SKSpriteNode(imageNamed: "deadAlien000" + String(count))
+                deadLoop.position = alienNode.position
+                deadLoop.size = alienNode.size
+                self.addChild(deadLoop)
+            }
+            if count > 9 && count < 21{
+                deadLoop = SKSpriteNode(imageNamed: "deadAlien00" + String(count))
+                deadLoop.position = alienNode.position
+                deadLoop.size = alienNode.size
+                self.addChild(deadLoop)
+            }
+            
+        }
+        let wait = SKAction.wait(forDuration: 0.1)
+        let fireLoop = SKAction.sequence([frame, wait])
+        let fireLoopForever = SKAction.repeatForever(fireLoop)
+        self.run(SKAction.playSoundFileNamed("zap3.mp3", waitForCompletion: false))
         
-        let explosion = SKEmitterNode(fileNamed: "Explosion")!
-        explosion.position = alienNode.position
-        self.addChild(explosion)
-        
-        self.run(SKAction.playSoundFileNamed("explosion.mp3", waitForCompletion: false))
-        
+        self.run(fireLoopForever)
         torpedoNode.removeFromParent()
         alienNode.removeFromParent()
         
         
         self.run(SKAction.wait(forDuration: 1.5)) {
-            explosion.removeFromParent()
+            deadLoop.removeFromParent()
         }
         
         
         
     }
     
+    
+ 
     func fireTorpedo(_ torpedoNode: SKSpriteNode) {
         
         if shot > 0 {
             return
         }
-        blast()
         shot += 1
         
         torpedoNode.position.y += 5
-        self.run(SKAction.playSoundFileNamed("explosion.mp3", waitForCompletion: false))
+        self.run(SKAction.playSoundFileNamed("zap1.mp3", waitForCompletion: false))
         
         let torpedoNode = SKSpriteNode(imageNamed: "laser3_0030")
         
@@ -360,6 +365,48 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         actionArray.append(SKAction.removeFromParent())
         
         torpedoNode.run(SKAction.sequence(actionArray))
+        
+        
+        var count = 0
+        var deadLoop = SKSpriteNode(imageNamed: "deadAlien000" + String(count))
+        deadLoop.size = user!.size
+        deadLoop.position = user!.position
+        addChild(deadLoop)
+        let frame2 = SKAction.run {
+            var position = self.user!.position
+            var size = self.user!.size
+            deadLoop.removeFromParent()
+            self.user!.removeFromParent()
+            count += 1
+            if count == 1 {
+                deadLoop = SKSpriteNode(imageNamed: "spaceshipShot0000" )
+                deadLoop.position = position
+                deadLoop.size = size
+                self.addChild(deadLoop)
+            }
+            else if count == 2 {
+                deadLoop = SKSpriteNode(imageNamed: "spaceshipShot0001")
+                deadLoop.position = position
+                deadLoop.size = size
+                self.addChild(deadLoop)
+            }
+            else if count == 3 {
+                deadLoop = SKSpriteNode(imageNamed: "spaceshipShot0000")
+                deadLoop.position = position
+                deadLoop.size = size
+                self.addChild(deadLoop)
+            }
+            else if count >= 4{
+            self.addChild(self.user!)
+            }
+            
+        }
+        let wait2 = SKAction.wait(forDuration: 0.1)
+        let fireLoop2 = SKAction.sequence([frame2, wait2])
+        let fireLoopForever2 = SKAction.repeat(fireLoop2, count: 4)
+        
+        self.run(fireLoopForever2)
+        
         
         
     }
