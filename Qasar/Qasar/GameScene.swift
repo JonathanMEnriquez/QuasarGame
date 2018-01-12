@@ -44,7 +44,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         self.lastUpdateTime = 0
         score.position.x = 0.0
-        score.position.y = 200.0
+        score.position.y = -300.0
         score.fontSize = 200.0
         score.fontColor = #colorLiteral(red: 0.9999960065, green: 1, blue: 1, alpha: 1)
         score.zPosition = 4.0
@@ -90,13 +90,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                         print(Int(myData.userAcceleration.x * 100))
                         print("X")
                         
-                        self.fireTorpedo(torpedoNode)
+//                        self.fireTorpedo(torpedoNode)
                         //                        torpedoNode.position.y += 25
                         
                         
                     }
                     
-                    if myData.userAcceleration.y > 0.9 || myData.userAcceleration.y < -0.9{
+                    if myData.userAcceleration.y > 0.9{
                         print(Int(myData.userAcceleration.x * 100))
                         print("Y")
                         
@@ -178,6 +178,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         gameTimer = Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(addEnemy), userInfo: nil, repeats: true)
         
         blastTimer = Timer.scheduledTimer(timeInterval: 0.2, target: self, selector: #selector(slowShot), userInfo: nil, repeats: true)
+        
+        
         
     }
     
@@ -322,6 +324,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
     }
     
+    
+ 
     func fireTorpedo(_ torpedoNode: SKSpriteNode) {
         
         if shot > 0 {
