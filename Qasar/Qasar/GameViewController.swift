@@ -11,7 +11,16 @@ import SpriteKit
 import GameplayKit
 
 class GameViewController: UIViewController {
+    
+    
 
+    
+    var timer = SKAction()
+    var check = SKAction()
+    var seq = SKAction()
+    
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -21,10 +30,11 @@ class GameViewController: UIViewController {
             
             // Get the SKScene from the loaded GKScene
             if let sceneNode = scene.rootNode as! GameScene? {
-                
                 // Copy gameplay related content over to the scene
                 sceneNode.entities = scene.entities
                 sceneNode.graphs = scene.graphs
+                
+                print("HEY, here's the score" + sceneNode.score.text!)
                 
                 // Set the scale mode to scale to fit the window
                 sceneNode.scaleMode = .aspectFill
